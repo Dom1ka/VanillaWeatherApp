@@ -23,6 +23,29 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Wed", "Thu", "Fri", "Sat"];
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+      <h5 class="card-title text-center">${day}</h5>
+         <p class="card-text text-center">
+            <img src="https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png" alt="" width="42" />
+          </p>
+          <p class="text-center high-temperature"><strong>20°</strong></p>
+          <p class="text-center low-temperature">10°</p>
+      </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayTemperarure(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -31,6 +54,8 @@ function displayTemperarure(response) {
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
+
+  displayForecast();
 
   celsiusTemperature = response.data.main.temp;
 
