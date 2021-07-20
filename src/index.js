@@ -22,8 +22,27 @@ function formatDate(timestamp) {
 
   return `${day} ${hours}:${minutes}`;
 }
+/* //myPosition function is STEP 3
+function myLocation(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
 
-function displayForecast() {
+  let units = "metric";
+  let apiKey = "708c6e03dd68365a43c77d48ed40d262";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(showData);
+}
+
+function currentLocation() {
+  navigator.geolocation.getCurrentPosition(myLocation); // STEP 2
+}
+
+let myCurrentLocation = document.querySelector("#my-location"); // STEP 1
+myCurrentLocation.addEventListener("click", currentLocation); */
+
+function displayForecast(response) {
+  console.log(response.data.list);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -46,6 +65,13 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function getForecast(coordinates) {
+  let apiKey = "708c6e03dd68365a43c77d48ed40d262";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayTemperarure(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -54,8 +80,6 @@ function displayTemperarure(response) {
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
-
-  displayForecast();
 
   celsiusTemperature = response.data.main.temp;
 
@@ -70,6 +94,8 @@ function displayTemperarure(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function search(city) {
@@ -82,6 +108,7 @@ function search(city) {
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
+
   search(cityInputElement.value);
 }
 
