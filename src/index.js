@@ -22,43 +22,40 @@ function formatDate(timestamp) {
 
   return `${day} ${hours}:${minutes}`;
 }
-/* //myPosition function is STEP 3
-function myLocation(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
 
-  let units = "metric";
-  let apiKey = "708c6e03dd68365a43c77d48ed40d262";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  console.log(apiUrl);
-  axios.get(apiUrl).then(showData);
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
 }
-
-function currentLocation() {
-  navigator.geolocation.getCurrentPosition(myLocation); // STEP 2
-}
-
-let myCurrentLocation = document.querySelector("#my-location"); // STEP 1
-myCurrentLocation.addEventListener("click", currentLocation); */
 
 function displayForecast(response) {
-  console.log(response.data.list);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Wed", "Thu", "Fri", "Sat"];
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-      <h5 class="card-title text-center">${day}</h5>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+      <h5 class="card-title text-center">${formatDay(forecastDay.dt)}</h5>
          <p class="card-text text-center">
-            <img src="https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png" alt="" width="42" />
+            <img src="http://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png" alt="" width="42" />
           </p>
-          <p class="text-center high-temperature"><strong>20°</strong></p>
-          <p class="text-center low-temperature">10°</p>
+          <p class="text-center high-temperature"><strong>${Math.round(
+            forecastDay.temp.max
+          )}°</strong></p>
+          <p class="text-center low-temperature">${Math.round(
+            forecastDay.temp.min
+          )}°</p>
       </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -67,7 +64,7 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   let apiKey = "708c6e03dd68365a43c77d48ed40d262";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
