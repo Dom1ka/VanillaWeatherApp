@@ -105,7 +105,13 @@ function search(city) {
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
+  let cityElement = document.querySelector("#city");
 
+  if (cityInputElement.value) {
+    cityElement.innerHTML = `${cityInputElement.value}`;
+  } else {
+    alert("Please, search for a city");
+  }
   search(cityInputElement.value);
 }
 
