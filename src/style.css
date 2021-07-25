@@ -1,19 +1,33 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(
+  /* background: linear-gradient(
     109.6deg,
     rgb(196, 197, 252) 11.2%,
     rgb(150, 199, 253) 100.2%
+  ); */
+  background: linear-gradient(
+    109.6deg,
+    rgb(185, 212, 242) 11.2%,
+    rgb(244, 210, 226) 100.3%
   );
 }
 .weather-app-wrapper {
-  max-width: 800px;
+  max-width: 700px;
   margin: 25px auto;
 }
 .weather-app {
   padding: 20px;
   border: 1px solid rgb(177, 174, 174);
   border-radius: 5px;
+}
+/* .search {
+  padding-right: 0px;
+}
+.my-location {
+  padding-left: 0px;
+} */
+.search {
+  padding: 0px;
 }
 .overview {
   margin-bottom: 15px;
@@ -53,8 +67,8 @@ a {
 }
 
 h1 {
-  color: grey;
-  font-size: 25px;
+  color: black;
+  font-size: 35px;
   font-weight: 100;
   line-height: 26px;
   margin-bottom: 0;
@@ -72,4 +86,9 @@ li {
 }
 li:first-letter {
   text-transform: capitalize;
+}
+button {
+  color: black;
+  background-color: transparent;
+  border: 1px solid transparent;
 }

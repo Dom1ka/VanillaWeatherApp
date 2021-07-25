@@ -31,6 +31,20 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+function formatTime(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -38,10 +52,10 @@ function displayForecast(response) {
   let forecastHTML = `<div class="row">`;
 
   forecast.forEach(function (forecastDay, index) {
-    if (index < 5) {
+    if (index < 4) {
       forecastHTML =
         forecastHTML +
-        `<div class="col-2">
+        `<div class="col-3">
       <h5 class="card-title text-center">${formatDay(forecastDay.dt)}</h5>
          <p class="card-text text-center">
             <img src="http://openweathermap.org/img/wn/${
@@ -65,7 +79,6 @@ function displayForecast(response) {
 function getForecast(coordinates) {
   let apiKey = "708c6e03dd68365a43c77d48ed40d262";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -98,7 +111,7 @@ function displayTemperarure(response) {
 function search(city) {
   let apiKey = "708c6e03dd68365a43c77d48ed40d262";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
+  //console.log(apiUrl);
   axios.get(apiUrl).then(displayTemperarure);
 }
 
@@ -107,11 +120,6 @@ function handleSubmit(event) {
   let cityInputElement = document.querySelector("#city-input");
   let cityElement = document.querySelector("#city");
 
-  if (cityInputElement.value) {
-    cityElement.innerHTML = `${cityInputElement.value}`;
-  } else {
-    alert("Please, search for a city");
-  }
   search(cityInputElement.value);
 }
 
@@ -129,6 +137,23 @@ function displayCelsiusTemperature(event) {
 }
 
 search("London");
+
+function displayPosition(position) {
+  let currentLatitude = position.coords.latitude;
+  let currentLongitude = position.coords.longitude;
+
+  let apiKey = "708c6e03dd68365a43c77d48ed40d262";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayTemperarure);
+}
+
+function getCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(displayPosition);
+}
+
+let currentPositionElement = document.querySelector("#my-location");
+currentPositionElement.addEventListener("click", getCurrentPosition); //current POSITION
 
 let celsiusTemperature = null;
 

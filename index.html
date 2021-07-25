@@ -24,7 +24,7 @@
         <div class="weather-app">
           <form id="search-form" class="mb-3">
             <div class="row">
-              <div class="col-7">
+              <div class="col-6">
                 <input
                   type="search"
                   class="form-control"
@@ -33,20 +33,23 @@
                   autocomplete="off"
                 />
               </div>
-              <div class="col-2">
-                <input type="submit" value="search" class="btn btn-primary" />
+              <div class="col search">
+                <button id="search"><i class="fas fa-search"></i></button>
               </div>
-              <!-- <div class="col-2"><button id="my-location" class="btn btn-primary">My location</button></div> -->
+              <div class="col search">
+                <button id="my-location"><i class="fas fa-search-location"></i></button>
+              </div> 
+              <div class="col-4"></div>
             </div>
           </form>
           <div class="overview">
             <h1 id="city"></h1>
+            <br>
             <ul>
               <li>Last updated: <span id="date"></span></li>
               <li id="description"></li>
             </ul>
           </div>
-          <!--OVERVIEW-->
           <div class="row">
             <div class="col-6">
               <div class="d-flex weather-temperature">
@@ -61,22 +64,27 @@
                 </div>
               </div>
             </div>
-            <!--COL-6-->
-            <div class="col-6">
+            <div class="col-4">
               <ul>
-                <li>Humidity: <span id="humidity"></span>%</li>
-                <li>Wind: <span id="wind"></span>km/h</li>
+                <li>Humidity: <span id="humidity"></span> %</li>
+                <li>Wind: <span id="wind"></span> km/h</li>
               </ul>
             </div>
-            <!--COL-6-->
-          </div>
-          <!--ROW-->
+           <!-- <div class="col-4">
+              <ul>
+                <li><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNNTAxLjM0NCwzMjUuMzI4SDM4MC4xODhjMi42MjUtMTAuMjE5LDQuMDMxLTIwLjkzOCw0LjAzMS0zMmMwLTcwLjgwNS01Ny40MDYtMTI4LjIxMS0xMjguMjE5LTEyOC4yMTENCgkJCXMtMTI4LjIxOSw1Ny40MDYtMTI4LjIxOSwxMjguMjExYzAsMTEuMDYyLDEuNDA2LDIxLjc4MSw0LjAzOSwzMkgxMC42NjRDNC43NzMsMzI1LjMyOCwwLDMzMC4xMDksMCwzMzYNCgkJCXM0Ljc3MywxMC42NzIsMTAuNjY0LDEwLjY3Mmg0OTAuNjhjNS44NzUsMCwxMC42NTYtNC43ODEsMTAuNjU2LTEwLjY3MlM1MDcuMjE5LDMyNS4zMjgsNTAxLjM0NCwzMjUuMzI4eiBNMzU4LjAzLDMyNS4zMjgNCgkJCUgxNTMuOTc3Yy0zLjE5Ni0xMC4yMTktNC44NjgtMjAuOTY5LTQuODY4LTMyYzAtMjguNTMxLDExLjEyNS01NS4zODMsMzEuMzEyLTc1LjU3YzIwLjE4Ny0yMC4xODcsNDcuMDMxLTMxLjMxMiw3NS41NzgtMzEuMzEyDQoJCQlzNTUuMzkxLDExLjEyNSw3NS41NzgsMzEuMzEyczMxLjMxMiw0Ny4wMzksMzEuMzEyLDc1LjU3QzM2Mi44ODksMzA0LjM1OSwzNjEuMjE3LDMxNS4xMDksMzU4LjAzLDMyNS4zMjh6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik05NiwyODIuNjcySDMyYy01Ljg5MSwwLTEwLjY2NCw0Ljc4MS0xMC42NjQsMTAuNjU2YzAsNS45MDYsNC43NzMsMTAuNjg4LDEwLjY2NCwxMC42ODhoNjQNCgkJCWM1Ljg5MSwwLDEwLjY2NC00Ljc4MSwxMC42NjQtMTAuNjg4QzEwNi42NjQsMjg3LjQ1MywxMDEuODkxLDI4Mi42NzIsOTYsMjgyLjY3MnoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTQ4MCwyODIuNjcyaC0wLjAzMUg0MTZjLTUuODkxLDAtMTAuNjU2LDQuNzgxLTEwLjY1NiwxMC42NTZjMCw1LjkwNiw0Ljc2NiwxMC42NzIsMTAuNjU2LDEwLjY4OGwwLjAxNi0wLjAxNg0KCQkJTDQ4MCwzMDQuMDE2VjMwNGM1Ljg5MSwwLjAxNiwxMC42NTYtNC43NjYsMTAuNjU2LTEwLjY3MkM0OTAuNjU2LDI4Ny40NTMsNDg1Ljg5LDI4Mi42NzIsNDgwLDI4Mi42NzJ6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik00MjEuOTM4LDEyNy40MDZjLTQuMTcyLTQuMTcyLTEwLjkyMi00LjE3Mi0xNS4wOTQsMGwtMC4wMTYsMC4wMTZsLTQ1LjIzNCw0NS4yMzRjLTQuMTU2LDQuMTY0LTQuMTU2LDEwLjkyMiwwLDE1LjA4Ng0KCQkJczEwLjkyMiw0LjE2NCwxNS4wOTQsMGMwLDAsMCwwLDAtMC4wMDhsNDUuMjUtNDUuMjVDNDI2LjA5NCwxMzguMzIsNDI2LjA5NCwxMzEuNTcsNDIxLjkzOCwxMjcuNDA2eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjU2LDU4LjY3MmMtNS44OTEsMC0xMC42NzIsNC43NzMtMTAuNjY0LDEwLjY2NGMwLDAuMDA4LDAsMC4wMTYsMCwwLjAzMXY2My45NjljMCw1Ljg5MSw0Ljc3MywxMC42NjQsMTAuNjY0LDEwLjY2NA0KCQkJYzUuODkxLDAuMDA4LDEwLjY2NC00Ljc3MywxMC42NjQtMTAuNjY0di02NEMyNjYuNjY0LDYzLjQ0NSwyNjEuODkxLDU4LjY3MiwyNTYsNTguNjcyeiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMTUwLjQwNiwxNzIuNjU2Yy0wLjAwOCwwLTAuMDA4LTAuMDA4LTAuMDA4LTAuMDA4bC00NS4yNS00NS4yNDJjLTQuMTY0LTQuMTcyLTEwLjkxNC00LjE3Mi0xNS4wODYsMA0KCQkJYy00LjE2NCw0LjE2NC00LjE2NCwxMC45MjIsMCwxNS4wODZjMC4wMDgsMCwwLjAxNiwwLjAwOCwwLjAyNCwwLjAxNmw0NS4yMzQsNDUuMjM0YzQuMTY0LDQuMTY0LDEwLjkyMiw0LjE2NCwxNS4wODYsMA0KCQkJUzE1NC41NywxNzYuODI4LDE1MC40MDYsMTcyLjY1NnoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTI4Ni4xNzIsMzkzLjc1bC0wLjAxNi0wLjAxNmwtMjIuNjA5LTIyLjYwOWgtMC4wMDhjLTEuOTMtMS45MjItNC41OTQtMy4xMjUtNy41MzktMy4xMjVzLTUuNjA5LDEuMjAzLTcuNTM5LDMuMTI1DQoJCQlsLTIyLjYzMywyMi42MjVjLTQuMTY0LDQuMTcyLTQuMTY0LDEwLjkyMiwwLDE1LjA3OGM0LjE2NCw0LjE3MiwxMC45MjIsNC4xNzIsMTUuMDg2LDBoMC4wMDhsNC40MTQtNC40MDZ2MzguMjUNCgkJCWMwLDUuODkxLDQuNzczLDEwLjY1NiwxMC42NjQsMTAuNjU2czEwLjY2NC00Ljc2NiwxMC42NjQtMTAuNjU2YzAsMCwwLTAuMDE2LDAtMC4wMzF2LTM4LjIxOWw0LjQyMiw0LjQwNg0KCQkJYzQuMTY0LDQuMTg4LDEwLjkxNCw0LjE4OCwxNS4wODYsMEMyOTAuMzQ0LDQwNC42NzIsMjkwLjM0NCwzOTcuOTIyLDI4Ni4xNzIsMzkzLjc1eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" 
+                  style="width:35px;height:35px;"/>
+                  : <span id="sunrise"></span></li>
+                <li><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNNTAxLjM0NCwzMjUuMzMySDM4MC4xODhjMi42MjUtMTAuMjE5LDQuMDMxLTIwLjkzOCw0LjAzMS0zMmMwLTcwLjgxMi01Ny40MDYtMTI4LjIxOS0xMjguMjE5LTEyOC4yMTkNCgkJCVMxMjcuNzgxLDIyMi41MiwxMjcuNzgxLDI5My4zMzJjMCwxMS4wNjIsMS40MDYsMjEuNzgxLDQuMDM5LDMySDEwLjY2NEM0Ljc3MywzMjUuMzMyLDAsMzMwLjExMywwLDMzNi4wMDQNCgkJCXM0Ljc3MywxMC42NzIsMTAuNjY0LDEwLjY3Mmg0OTAuNjhjNS44NzUsMCwxMC42NTYtNC43ODEsMTAuNjU2LTEwLjY3MlM1MDcuMjE5LDMyNS4zMzIsNTAxLjM0NCwzMjUuMzMyeiBNMzU4LjAzLDMyNS4zMzINCgkJCUgxNTMuOTc3Yy0zLjE5Ni0xMC4yMTktNC44NjgtMjAuOTY5LTQuODY4LTMyYzAtMjguNTQ3LDExLjEyNS01NS4zOTEsMzEuMzEyLTc1LjU3OGMyMC4xODctMjAuMTg3LDQ3LjAzMS0zMS4zMDUsNzUuNTc4LTMxLjMwNQ0KCQkJczU1LjM5MSwxMS4xMTcsNzUuNTc4LDMxLjMwNWMyMC4yMDMsMjAuMTg4LDMxLjMyOCw0Ny4wMzEsMzEuMzI4LDc1LjU3OEMzNjIuOTA1LDMwNC4zNjMsMzYxLjIxNywzMTUuMTEzLDM1OC4wMywzMjUuMzMyeiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNOTYsMjgyLjY3NkgzMmMtNS44OTEsMC0xMC42NjQsNC43ODEtMTAuNjY0LDEwLjY1NmMwLDUuOTA2LDQuNzczLDEwLjY3MiwxMC42NjQsMTAuNjcyaDY0DQoJCQljNS44OTEsMCwxMC42NjQtNC43NjYsMTAuNjY0LTEwLjY3MkMxMDYuNjY0LDI4Ny40NTcsMTAxLjg5MSwyODIuNjc2LDk2LDI4Mi42NzZ6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik00ODAsMjgyLjY3NmMwLDAsMCwwLTAuMDMxLDBINDE2Yy01Ljg3NSwwLTEwLjY1Niw0Ljc4MS0xMC42NTYsMTAuNjU2YzAsNS45MDYsNC43ODEsMTAuNjcyLDEwLjY1NiwxMC42NzINCgkJCWMwLDAsMCwwLDAuMDMxLDBINDgwYzUuOTA2LDAsMTAuNjU2LTQuNzY2LDEwLjY1Ni0xMC42NzJDNDkwLjY1NiwyODcuNDU3LDQ4NS45MDYsMjgyLjY3Niw0ODAsMjgyLjY3NnoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTQyMS45MzgsMTI3LjQwMmMtNC4xNTYtNC4xNjQtMTAuOTA2LTQuMTY0LTE1LjA5NCwwdjAuMDIzbC00NS4yNSw0NS4yMjd2MC4wMDhjLTQuMTU2LDQuMTY0LTQuMTU2LDEwLjkxNCwwLDE1LjA4Ng0KCQkJYzQuMTU2LDQuMTY0LDEwLjkzNyw0LjE2NCwxNS4wOTQsMHYtMC4wMDhsNDUuMjUtNDUuMjVDNDI2LjA5NCwxMzguMzI0LDQyNi4wOTQsMTMxLjU2Niw0MjEuOTM4LDEyNy40MDJ6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yNTYsNTguNjY4Yy01Ljg5MSwwLTEwLjY3Miw0Ljc4MS0xMC42NjQsMTAuNjcydjAuMDIzdjYzLjk3N2MwLDUuODkxLDQuNzczLDEwLjY2NCwxMC42NjQsMTAuNjY0DQoJCQlzMTAuNjY0LTQuNzczLDEwLjY2NC0xMC42NjR2LTY0QzI2Ni42NjQsNjMuNDQ5LDI2MS44OTEsNTguNjY4LDI1Niw1OC42Njh6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0xNTAuNDA2LDE3Mi42NmwtMC4wMDgtMC4wMDhsLTQ1LjI1LTQ1LjI1Yy00LjE2NC00LjE2NC0xMC45MTQtNC4xNjQtMTUuMDg2LDBjLTQuMTY0LDQuMTY0LTQuMTY0LDEwLjkyMiwwLDE1LjA4Ng0KCQkJYzAuMDA4LDAuMDA4LDAuMDE2LDAuMDA4LDAuMDI0LDAuMDE2bDQ1LjIzNCw0NS4yNDJjNC4xNjQsNC4xNjQsMTAuOTIyLDQuMTY0LDE1LjA4NiwwUzE1NC41NywxNzYuODI0LDE1MC40MDYsMTcyLjY2eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjg2LjE3Miw0MTIuNTA0Yy00LjE3Mi00LjE3Mi0xMC45MjItNC4xNzItMTUuMDg2LDBoLTAuMDA4bC00LjQxNCw0LjQyMnYtMzguMjVjMC01LjkwNi00Ljc3My0xMC42NzItMTAuNjY0LTEwLjY3Mg0KCQkJcy0xMC42NzIsNC43NjYtMTAuNjcyLDEwLjY3MmMwLDAsMC4wMDgsMCwwLjAwOCwwLjAzMXYzOC4yMTlsLTQuNDIyLTQuNDIyYy00LjE2NC00LjE3Mi0xMC45MjItNC4xNzItMTUuMDg2LDANCgkJCXMtNC4xNjQsMTAuOTIyLDAsMTUuMDc4YzAuMDA4LDAuMDE2LDAuMDE2LDAuMDE2LDAuMDIzLDAuMDMxbDIyLjYwMiwyMi41OTRjMS45MzgsMS45MzgsNC42MDIsMy4xMjUsNy41NDcsMy4xMjUNCgkJCXM1LjYwOS0xLjE4OCw3LjUzOS0zLjEyNWwyMi42MzMtMjIuNjI1QzI5MC4zNDQsNDIzLjQyNiwyOTAuMzQ0LDQxNi42NzYsMjg2LjE3Miw0MTIuNTA0eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" 
+                  style="width:35px;height:35px;"/>
+                  : <span id="sunset"></span></li>
+              </ul>
+            </div>-->
+          </div> 
           <br>
           <br>
-          <div id="forecast">  
+          <div id="forecast">  </div>
         </div>
-        </div>
-      <!--WEATHER-APP-WRAPPER-->
       <small><a href="https://github.com/Dom1ka/VanillaWeatherApp" target="_blank">
         Open-code source
       </a> 
@@ -84,7 +92,6 @@
       <a href="https://www.instagram.com/dom.ika/" target="_blank"><i class="fab fa-instagram"></i
       ></a> </small>
     </div>
-    <!--CONTAINER-->
     <script src="src/index.js"></script>
   </body>
 </html>
